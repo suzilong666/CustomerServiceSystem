@@ -2,7 +2,7 @@
 
 namespace App\GatewayWorker\Events;
 
-class Events
+class MessageEvent
 {
 
     public static function onWorkerStart($businessWorker)
@@ -22,7 +22,10 @@ class Events
 
     public static function onMessage($client_id, $message)
     {
-        echo "BusinessWorker onMessage, client_id:" . $client_id . ", message:" . $message . "\n";
+        $message = json_decode($message, true);
+        if (isset($message) && $message['type']) {
+            MessageEvent::handle($client_id, $message);
+        }
     }
 
     public static function onClose($client_id)

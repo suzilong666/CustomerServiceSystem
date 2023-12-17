@@ -2,7 +2,7 @@
 
 namespace App\GatewayWorker\Events;
 
-class MessageEvent
+class Events
 {
 
     public static function onWorkerStart($businessWorker)

@@ -16,3 +16,10 @@ ws发生的数据数据
 ```
 {"type":"login","data":{"username":"susu","password":"123456"}}
 ```
+
+生成模型
+```
+php artisan make:model User --migration
+
+php artisan migrate
+```

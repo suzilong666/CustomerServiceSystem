@@ -21,7 +21,11 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        // \App\Models\User::created()
+        \App\Models\User::create([
+            'username' => 'admin',
+            'password' => '123456',
+            'role' => 1,
+        ]);
     }
 
     /**

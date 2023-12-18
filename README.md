@@ -22,4 +22,5 @@ ws发生的数据数据
 php artisan make:model User --migration
 
 php artisan migrate
+php artisan migrate:rollback
 ```

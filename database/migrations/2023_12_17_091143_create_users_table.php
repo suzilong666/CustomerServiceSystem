@@ -16,14 +16,14 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username');
-            $table->string('password');
+            $table->string('password', 256);
             $table->tinyInteger('role');
             $table->timestamps();
         });
 
         \App\Models\User::create([
             'username' => 'admin',
-            'password' => '123456',
+            'password' => bcrypt('123456'),
             'role' => 1,
         ]);
     }

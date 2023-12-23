@@ -10,26 +10,26 @@ class Events
         echo "BusinessWorker Start\n";
     }
 
-    public static function onConnect($client_id)
+    public static function onConnect($clientId)
     {
-        echo "BusinessWorker onConnect, client_id:" . $client_id . "\n";
+        echo "BusinessWorker onConnect, clientId:" . $clientId . "\n";
     }
 
-    public static function onWebSocketConnect($client_id, $data)
+    public static function onWebSocketConnect($clientId, $data)
     {
-        echo "BusinessWorker onWebSocketConnect, client_id:" . $client_id . "\n";
+        echo "BusinessWorker onWebSocketConnect, clientId:" . $clientId . "\n";
     }
 
-    public static function onMessage($client_id, $message)
+    public static function onMessage($clientId, $message)
     {
         $message = json_decode($message, true);
         if (isset($message) && $message['type']) {
-            MessageEvent::handle($client_id, $message);
+            MessageEvent::handle($clientId, $message);
         }
     }
 
-    public static function onClose($client_id)
+    public static function onClose($clientId)
     {
-        echo "BusinessWorker onClose, client_id:" . $client_id . "\n";
+        echo "BusinessWorker onClose, clientId:" . $clientId . "\n";
     }
 }

@@ -3,20 +3,25 @@
 namespace App\GatewayWorker\Events;
 
 use \GatewayWorker\Lib\Gateway;
+use Tymon\JWTAuth\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class MessageEvent
 {
-    public static function handle($client_id, $message)
+    public static function handle($clientId, $message)
     {
         $functionName = $message['type'];
-        $data = $message['data'] || [];
+        $data = $message['data'];
         if (method_exists(self::class, $functionName)) {
-            self::$functionName($client_id, $data);
+            self::$functionName($clientId, $data);
         }
     }
 
-    public static function login($client_id, $data = [])
+    public static function login($clientId, $data = [])
     {
-        Gateway::sendToClient($client_id, json_encode(["type" => "login", "message" => "登录成功"]));
+        $token = auth()->validate($data);
+        Gateway::sendToClient($clientId, json_encode(["type" => "login", "message" => "登录成功", "data" => $token]));
     }
 }

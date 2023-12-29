@@ -2,22 +2,24 @@
 
 namespace App\GatewayWorker\Events;
 
+$GLOBALS['visitor'] = []; // 访客列表；visitorClientId => customerServiceClientId
+$GLOBALS['customerService'] = []; // 客服列表 customerServiceClientId => [ visitorClientId ]
+
 class Events
 {
-
     public static function onWorkerStart($businessWorker)
     {
         echo "BusinessWorker Start\n";
     }
 
-    public static function onConnect($clientId)
-    {
-        echo "BusinessWorker onConnect, clientId:" . $clientId . "\n";
-    }
+    // public static function onConnect($clientId)
+    // {
+    //     $GLOBALS['clientId'][$clientId] = null;
+    // }
 
     public static function onWebSocketConnect($clientId, $data)
     {
-        echo "BusinessWorker onWebSocketConnect, clientId:" . $clientId . "\n";
+        logger($data);
     }
 
     public static function onMessage($clientId, $message)
@@ -30,6 +32,7 @@ class Events
 
     public static function onClose($clientId)
     {
-        echo "BusinessWorker onClose, clientId:" . $clientId . "\n";
+        if (isset($GLOBALS['clientId'][$clientId])) {
+        }
     }
 }
